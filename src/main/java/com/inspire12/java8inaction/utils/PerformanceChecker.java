@@ -3,6 +3,7 @@ package com.inspire12.java8inaction.utils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StopWatch;
 
+import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
@@ -17,4 +18,5 @@ public class PerformanceChecker {
         watch.stop();
         log.info("[performance] {} elapse time: {}", name, watch.getTotalTimeMillis());
     }
+
 }

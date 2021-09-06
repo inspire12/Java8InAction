@@ -1,6 +1,7 @@
 package com.inspire12.java8inaction.chapter4;
 import lombok.*;
 
+@ToString
 @Getter
 @AllArgsConstructor
 public class Dish {

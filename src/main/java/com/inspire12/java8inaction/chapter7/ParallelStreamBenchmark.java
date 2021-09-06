@@ -7,6 +7,8 @@ import org.openjdk.jmh.annotations.Fork;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
+import org.openjdk.jmh.annotations.Scope;
+import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.runner.RunnerException;
 
@@ -17,17 +19,19 @@ import java.util.stream.Stream;
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 @Fork(value = 2, jvmArgs={"-Xms4G", "-Xmx4G"})
+@State(Scope.Benchmark)
 public class ParallelStreamBenchmark {
     private static final long N = 10_000_000L;
 
     public static void main(String[] args) throws RunnerException, IOException {
         org.openjdk.jmh.Main.main(args);
     }
-//    @Benchmark
-//    public long sequentialSum() {
-//        return Stream.iterate(1L, i -> i + 1).limit(N)
-//                .reduce(0L, Long::sum);
-//    }
+
+    @Benchmark
+    public long sequentialSum() {
+        return Stream.iterate(1L, i -> i + 1).limit(N)
+                .reduce(0L, Long::sum);
+    }
 
     @Benchmark
     public long iterativeSum() {
