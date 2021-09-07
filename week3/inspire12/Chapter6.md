@@ -47,12 +47,7 @@ reduce는 하나로 도출하는 불변형 연산
 
 리듀싱 내부적으로 자신을 **그대로 반환하는 항등함수를  두번째 인수로** 받는 상황
 
-그룹화로 스트림 항목 분류하는 과정 
-
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/24cf2b19-cec8-4567-aff9-2724a94db659/Untitled.png)
-
-퀴즈
-
+### 퀴즈
 reducing: input 타입과 output 타입이 같아야한다. 
 
 ## 그룹화: Collectors.groupingBy
@@ -79,7 +74,7 @@ Map<Boolean, List<Dish>> partitionedMenu =
 										.collect(partitioningBy(Dish::isVegetarian));
 ```
 
-다수준 분할 
+### 다수준 분할 
 
 퀴즈
 
@@ -146,7 +141,7 @@ public BinaryOperator<List<T>> combiner() {
     - CONCURRENT: 다중 스레드에서 accumulator 함수를 동시에 호출할 수 있으며 이 컬렉터는 스트림의 병렬 리듀싱을 수행할 수 있다
     - IDENTITY_FINISH: 생략가능, finisher 메서드가 반환하는 함수는 단순히 identity를 적용할 뿐이므로 생략 가능
 
-Custom Collector: Rank 넣기
+### Custom Collector: Rank 넣기
 
 ```java
 @Getter
