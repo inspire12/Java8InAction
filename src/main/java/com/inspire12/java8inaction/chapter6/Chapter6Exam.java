@@ -1,7 +1,9 @@
 package com.inspire12.java8inaction.chapter6;
 
 import com.inspire12.java8inaction.chapter4.Dish;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -108,6 +110,38 @@ public class Chapter6Exam {
 
         menu.stream().collect(partitioningBy(Dish::isVegetarian, partitioningBy(d -> d.getCalories() > 500)));
         // menu.stream().collect(partitioningBy(Dish::isVegetarian, partitioningBy(Dish::getCalories))); compile fail
+    }
+    @ToString
+    @Getter
+    @AllArgsConstructor
+    public static class Batter implements Comparable<Batter> {
+        String name;
+        int hr; // 홈런
+
+        @Override
+        public int compareTo(Batter o) {
+            return o.getHr() - this.hr;
+        }
+    }
+    public static class Pitcher {
+        int so; // 삼진
+    }
+
+    public static void addRank() {
+        List<Batter> batters = Arrays.asList(
+                new Batter("이승엽", 5),
+                new Batter("김태균", 3),
+                new Batter("이대호", 6),
+                new Batter("나성범", 5)
+        );
+
+        Comparator<? super Batter> comparator = Comparator.comparingInt(Batter::getHr).reversed();
+        List<Rank<Batter>> batterRanks = batters.stream()
+                .sorted(comparator)
+                .map(b -> new Rank<>(0, b))
+                .collect(new RankCollector<>(comparator));
+
+        batterRanks.forEach(batterRank -> System.out.println(batterRank.getRank() + " " + batterRank.getContent().getName()));
     }
 
     public boolean isPrime(int candidate) {

@@ -20,14 +20,14 @@ public class ForkJoinSumCalculator extends java.util.concurrent.RecursiveTask<Lo
     protected Long compute() {
         int length = end - start;
         if (length <= THRESHOLD) {
-            return computeSequentially();
+            return computeSequentially(); // 기준보다 같거나 작으면 순차적으로 결과를 계산
         }
         ForkJoinSumCalculator leftTask = new ForkJoinSumCalculator(numbers, start, start + length / 2);
         leftTask.fork();
         ForkJoinSumCalculator rightTask = new ForkJoinSumCalculator(numbers, start + length / 2, end);
         Long rightResult = rightTask.compute();
         Long leftResult = leftTask.join();
-        return leftResult + rightResult;
+        return leftResult + rightResult; // 두 서브태스크의 결과를 조합한 값이 태스크의 결과
     }
 
     private Long computeSequentially() {
