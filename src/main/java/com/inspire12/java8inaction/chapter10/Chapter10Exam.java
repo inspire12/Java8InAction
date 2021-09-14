@@ -46,6 +46,6 @@ public class Chapter10Exam {
         });
 
         Order order2 =
-                MixedBuilder.forCustomer("BigBank", buy(t -> t.quantity(80));
+                MixedBuilder.forCustomer("BigBank", buy(t -> t.quantity(80)));
     }
 }
