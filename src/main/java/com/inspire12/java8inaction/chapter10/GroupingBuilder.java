@@ -1,4 +1,4 @@
-package com.inspire12.java8inaction.chatper10;
+package com.inspire12.java8inaction.chapter10;
 
 import java.util.List;
 import java.util.Map;
